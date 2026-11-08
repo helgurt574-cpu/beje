@@ -1,0 +1,15 @@
+Package: beje
+Version: @VERSION@
+Section: utils
+Priority: optional
+Architecture: amd64
+Maintainer: Bêje <beje@localhost>
+Installed-Size: @SIZE@
+Depends: libasound2t64 | libasound2, libfreetype6, libfontconfig1, libx11-6, libxext6, libxi6, libxrender1, libxtst6
+Recommends: xdotool | wtype | ydotool, ffmpeg
+Description: Bêje - çevrimdışı dikte / offline dictation
+ Konuşmayı tamamen bilgisayarda, internetsiz yazıya döker (Türkçe, Farsça,
+ Arapça). Java ve konuşma modelleri pakete dahildir.
+ .
+ Speech-to-text that runs entirely offline on this computer. Java runtime
+ and speech models are bundled.

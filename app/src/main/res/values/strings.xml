@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Bêje</string>
+    <string name="app_tagline">Çevrimdışı dikte</string>
+
+    <!-- Dil adları her zaman kendi dillerinde gösterilir -->
+    <string name="lang_tr" translatable="false">Türkçe</string>
+    <string name="lang_ku" translatable="false">Kurmancî</string>
+    <string name="lang_ar" translatable="false">العربية</string>
+    <string name="lang_fa" translatable="false">فارسی</string>
+    <string name="lang_en" translatable="false">English</string>
+    <string name="lang_system">Sistem dili</string>
+
+    <string name="status_preparing">Hazırlanıyor…</string>
+    <string name="status_model_loading">Model yükleniyor…</string>
+    <string name="status_model_ready">Hazır · internet gerekmez</string>
+    <string name="status_no_model">Dil paketi gerekli</string>
+    <string name="status_listening">Dinleniyor…</string>
+    <string name="status_transcribing_file">Ses dosyası yazıya dökülüyor · %%%1$d</string>
+    <string name="status_error">Hata</string>
+
+    <string name="mic_hint_idle">Konuşmak için dokunun</string>
+    <string name="mic_hint_listening">Dinleniyor · durdurmak için dokunun</string>
+    <string name="mic_hint_no_model">Önce bir dil paketi ekleyin</string>
+    <string name="mic_hint_loading">Model hazırlanıyor…</string>
+    <string name="mic_hint_file">Durdurmak için dokunun</string>
+
+    <string name="label_transcript">Metin</string>
+    <plurals name="word_count">
+        <item quantity="one">%d kelime</item>
+        <item quantity="other">%d kelime</item>
+    </plurals>
+    <string name="hint_transcript">Söyledikleriniz burada yazıya dökülür. Metni dilediğiniz gibi düzenleyebilirsiniz.</string>
+    <string name="hint_start_speaking">Konuşmaya başlayın…</string>
+
+    <string name="action_start_listening">Dinlemeyi başlat</string>
+    <string name="action_stop_listening">Dinlemeyi durdur</string>
+    <string name="action_save">Kaydet</string>
+    <string name="action_share">Paylaş</string>
+    <string name="action_copy">Kopyala</string>
+    <string name="action_clear">Temizle</string>
+    <string name="action_undo">Geri al</string>
+    <string name="action_language_packs">Dil paketleri</string>
+    <string name="action_ui_language">Arayüz dili</string>
+    <string name="action_transcribe_file">Ses dosyasını yazıya dök</string>
+    <string name="action_about">Hakkında</string>
+    <string name="action_cancel">İptal</string>
+    <string name="action_close">Kapat</string>
+    <string name="action_download">İndir</string>
+    <string name="action_use">Kullan</string>
+    <string name="action_active">Etkin</string>
+    <string name="action_delete">Sil</string>
+    <string name="action_retry">Tekrar dene</string>
+    <string name="action_continue">Devam et</string>
+    <string name="action_import">İçe aktar</string>
+    <string name="action_import_folder">Klasörden içe aktar</string>
+
+    <string name="copied">Metin kopyalandı</string>
+    <string name="cleared">Metin temizlendi</string>
+    <string name="nothing_to_save">Kaydedilecek metin yok</string>
+    <string name="file_saved">%1$s olarak kaydedildi</string>
+    <string name="file_failed">Dosya kaydedilemedi</string>
+    <string name="dialog_export_title">Farklı kaydet</string>
+    <string name="format_txt">Düz metin (.txt)</string>
+    <string name="format_pdf">PDF belgesi (.pdf)</string>
+    <string name="format_odt">OpenDocument metni (.odt)</string>
+    <string name="format_docx">Word belgesi (.docx)</string>
+
+    <string name="packs_title">Dil paketleri</string>
+    <string name="packs_subtitle">Konuşma tanıma tamamen cihazınızda, internetsiz çalışır. Kullanacağınız dilin paketini bir kez indirmeniz yeterli.</string>
+    <string name="packs_subtitle_offline">Kullanacağınız dilin model klasörünü bir kez içe aktarmanız yeterli. Konuşma tanıma tamamen cihazınızda, internetsiz çalışır.</string>
+    <string name="packs_play_unavailable">Bu kurulum Google Play üzerinden yapılmadığı için paketler indirilemiyor. Model klasörünü cihazınızdan içe aktarabilirsiniz.</string>
+    <string name="pack_size">≈ %1$s</string>
+    <string name="pack_state_not_installed">İndirilmedi</string>
+    <string name="pack_state_pending">Sırada…</string>
+    <string name="pack_state_downloading">İndiriliyor · %%%1$d</string>
+    <string name="pack_state_installing">Kuruluyor…</string>
+    <string name="pack_state_importing">İçe aktarılıyor…</string>
+    <string name="pack_state_installed">Yüklü</string>
+    <string name="pack_state_imported">Klasörden içe aktarıldı</string>
+    <string name="pack_state_active">Kullanımda</string>
+    <string name="pack_state_failed">İndirme başarısız</string>
+    <string name="pack_state_waiting_wifi">Wi-Fi bekleniyor</string>
+    <string name="pack_state_needs_confirmation">Onayınız gerekiyor</string>
+    <string name="pack_state_unavailable">Klasörden içe aktarın</string>
+    <string name="pack_large_note">büyük model</string>
+    <string name="pack_delete_title">%1$s paketi silinsin mi?</string>
+    <string name="pack_delete_message">Paketi istediğiniz zaman yeniden indirebilirsiniz.</string>
+    <string name="pack_error_network">İnternet bağlantısı yok. Bağlandıktan sonra tekrar deneyin.</string>
+    <string name="pack_error_storage">Cihazda yeterli boş alan yok.</string>
+    <string name="pack_error_generic">Paket indirilemedi (kod %1$d).</string>
+    <string name="pack_ready_snackbar">%1$s paketi hazır</string>
+
+    <string name="import_choose_language">Hangi dilin modeli içe aktarılacak?</string>
+    <string name="import_hint">Sonraki adımda, içinde final.mdl bulunan model klasörünü ya da BejeModels/%1$s klasörünü seçin.</string>
+    <string name="import_failed">Model içe aktarılamadı: %1$s</string>
+    <string name="model_not_found">Klasörde geçerli bir model bulunamadı (final.mdl yok).</string>
+    <string name="model_load_failed">Model yüklenemedi. Paketi silip yeniden indirmeyi deneyin.</string>
+
+    <string name="error_permission_denied">Mikrofon izni verilmedi. Konuşmayı yazıya dökmek için mikrofon izni gerekli.</string>
+    <string name="error_mic">Mikrofon başlatılamadı. Başka bir uygulama mikrofonu kullanıyor olabilir.</string>
+    <string name="error_mic_read">Mikrofondan ses okunamadı.</string>
+    <string name="error_recognizer">Konuşma tanıyıcı başlatılamadı.</string>
+    <string name="error_audio_file">Ses dosyası okunamadı ya da bu biçim desteklenmiyor.</string>
+    <string name="transcribe_done">Ses dosyası yazıya döküldü</string>
+    <string name="transcribe_cancelled">Yazıya dökme durduruldu</string>
+
+    <string name="dialog_ui_language">Arayüz dili</string>
+    <string name="about_title">Bêje hakkında</string>
+    <string name="about_message">Sürüm %1$s\n\nBêje konuşmanızı tamamen cihaz üzerinde yazıya döker. Ses kaydedilmez ve hiçbir veri internete gönderilmez. İnternet yalnızca dil paketlerini Google Play üzerinden indirmek için kullanılır.\n\nAçık kaynak bileşenler: Vosk ve Kaldi modelleri (Apache 2.0), JNA (Apache 2.0), AndroidX ve Material Components (Apache 2.0).</string>
+</resources>

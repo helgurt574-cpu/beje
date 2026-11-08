@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_tagline">إملاء بدون إنترنت</string>
+    <string name="lang_system">لغة النظام</string>
+
+    <string name="status_preparing">جارٍ التحضير…</string>
+    <string name="status_model_loading">جارٍ تحميل النموذج…</string>
+    <string name="status_model_ready">جاهز · لا حاجة للإنترنت</string>
+    <string name="status_no_model">حزمة لغة مطلوبة</string>
+    <string name="status_listening">جارٍ الاستماع…</string>
+    <string name="status_transcribing_file">جارٍ تفريغ الملف الصوتي · %1$d٪</string>
+    <string name="status_error">خطأ</string>
+
+    <string name="mic_hint_idle">اضغط للتحدث</string>
+    <string name="mic_hint_listening">جارٍ الاستماع · اضغط للإيقاف</string>
+    <string name="mic_hint_no_model">أضف حزمة لغة أولاً</string>
+    <string name="mic_hint_loading">جارٍ تجهيز النموذج…</string>
+    <string name="mic_hint_file">اضغط للإيقاف</string>
+
+    <string name="label_transcript">النص</string>
+    <plurals name="word_count">
+        <item quantity="zero">%d كلمة</item>
+        <item quantity="one">كلمة واحدة</item>
+        <item quantity="two">كلمتان</item>
+        <item quantity="few">%d كلمات</item>
+        <item quantity="many">%d كلمة</item>
+        <item quantity="other">%d كلمة</item>
+    </plurals>
+    <string name="hint_transcript">يظهر هنا ما تقوله مكتوباً. يمكنك تعديل النص كما تشاء.</string>
+    <string name="hint_start_speaking">ابدأ التحدث…</string>
+
+    <string name="action_start_listening">بدء الاستماع</string>
+    <string name="action_stop_listening">إيقاف الاستماع</string>
+    <string name="action_save">حفظ</string>
+    <string name="action_share">مشاركة</string>
+    <string name="action_copy">نسخ</string>
+    <string name="action_clear">مسح</string>
+    <string name="action_undo">تراجع</string>
+    <string name="action_language_packs">حزم اللغات</string>
+    <string name="action_ui_language">لغة الواجهة</string>
+    <string name="action_transcribe_file">تفريغ ملف صوتي</string>
+    <string name="action_about">حول التطبيق</string>
+    <string name="action_cancel">إلغاء</string>
+    <string name="action_close">إغلاق</string>
+    <string name="action_download">تنزيل</string>
+    <string name="action_use">استخدام</string>
+    <string name="action_active">مفعّل</string>
+    <string name="action_delete">حذف</string>
+    <string name="action_retry">إعادة المحاولة</string>
+    <string name="action_continue">متابعة</string>
+    <string name="action_import">استيراد</string>
+    <string name="action_import_folder">استيراد من مجلد</string>
+
+    <string name="copied">تم نسخ النص</string>
+    <string name="cleared">تم مسح النص</string>
+    <string name="nothing_to_save">لا يوجد نص لحفظه</string>
+    <string name="file_saved">تم الحفظ بصيغة %1$s</string>
+    <string name="file_failed">تعذّر حفظ الملف</string>
+    <string name="dialog_export_title">حفظ باسم</string>
+    <string name="format_txt">نص عادي (.txt)</string>
+    <string name="format_pdf">مستند PDF (.pdf)</string>
+    <string name="format_odt">نص OpenDocument (.odt)</string>
+    <string name="format_docx">مستند Word (.docx)</string>
+
+    <string name="packs_title">حزم اللغات</string>
+    <string name="packs_subtitle">يعمل التعرّف على الكلام بالكامل على جهازك ودون إنترنت. يكفي تنزيل حزمة لغتك مرة واحدة.</string>
+    <string name="packs_subtitle_offline">يكفي استيراد مجلد نموذج لغتك مرة واحدة. يعمل التعرّف على الكلام بالكامل على جهازك ودون إنترنت.</string>
+    <string name="packs_play_unavailable">لم يتم تثبيت هذه النسخة من Google Play، لذلك لا يمكن تنزيل الحزم. يمكنك استيراد مجلد النموذج من جهازك.</string>
+    <string name="pack_size">≈ %1$s</string>
+    <string name="pack_state_not_installed">غير مُنزّلة</string>
+    <string name="pack_state_pending">في الانتظار…</string>
+    <string name="pack_state_downloading">جارٍ التنزيل · %1$d٪</string>
+    <string name="pack_state_installing">جارٍ التثبيت…</string>
+    <string name="pack_state_importing">جارٍ الاستيراد…</string>
+    <string name="pack_state_installed">مثبّتة</string>
+    <string name="pack_state_imported">مستوردة من مجلد</string>
+    <string name="pack_state_active">قيد الاستخدام</string>
+    <string name="pack_state_failed">فشل التنزيل</string>
+    <string name="pack_state_waiting_wifi">بانتظار Wi-Fi</string>
+    <string name="pack_state_needs_confirmation">بحاجة إلى موافقتك</string>
+    <string name="pack_state_unavailable">استورد من مجلد</string>
+    <string name="pack_large_note">نموذج كبير</string>
+    <string name="pack_delete_title">حذف حزمة %1$s؟</string>
+    <string name="pack_delete_message">يمكنك تنزيلها مجدداً في أي وقت.</string>
+    <string name="pack_error_network">لا يوجد اتصال بالإنترنت. حاول مجدداً بعد الاتصال.</string>
+    <string name="pack_error_storage">لا توجد مساحة كافية على الجهاز.</string>
+    <string name="pack_error_generic">تعذّر تنزيل الحزمة (الرمز %1$d).</string>
+    <string name="pack_ready_snackbar">حزمة %1$s جاهزة</string>
+
+    <string name="import_choose_language">لأي لغة هذا النموذج؟</string>
+    <string name="import_hint">بعد ذلك اختر مجلد النموذج الذي يحتوي على final.mdl أو المجلد BejeModels/%1$s.</string>
+    <string name="import_failed">تعذّر استيراد النموذج: %1$s</string>
+    <string name="model_not_found">لم يُعثر على نموذج صالح في المجلد (final.mdl غير موجود).</string>
+    <string name="model_load_failed">تعذّر تحميل النموذج. احذف الحزمة ونزّلها مجدداً.</string>
+
+    <string name="error_permission_denied">لم يتم منح إذن الميكروفون. الإذن ضروري لتحويل الكلام إلى نص.</string>
+    <string name="error_mic">تعذّر تشغيل الميكروفون. ربما يستخدمه تطبيق آخر.</string>
+    <string name="error_mic_read">تعذّرت قراءة الصوت من الميكروفون.</string>
+    <string name="error_recognizer">تعذّر بدء التعرّف على الكلام.</string>
+    <string name="error_audio_file">تعذّرت قراءة الملف الصوتي أو أن صيغته غير مدعومة.</string>
+    <string name="transcribe_done">تم تفريغ الملف الصوتي</string>
+    <string name="transcribe_cancelled">تم إيقاف التفريغ</string>
+
+    <string name="dialog_ui_language">لغة الواجهة</string>
+    <string name="about_title">حول Bêje</string>
+    <string name="about_message">الإصدار %1$s\n\nيحوّل Bêje كلامك إلى نص بالكامل على جهازك. لا يتم حفظ الصوت ولا تُرسل أي بيانات عبر الإنترنت. يُستخدم الإنترنت فقط لتنزيل حزم اللغات من Google Play.\n\nمكوّنات مفتوحة المصدر: نماذج Vosk وKaldi ‏(Apache 2.0)، JNA ‏(Apache 2.0)، AndroidX وMaterial Components ‏(Apache 2.0).</string>
+</resources>

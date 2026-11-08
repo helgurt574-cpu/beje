@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_tagline">دیکته بدون اینترنت</string>
+    <string name="lang_system">زبان سیستم</string>
+
+    <string name="status_preparing">در حال آماده‌سازی…</string>
+    <string name="status_model_loading">در حال بارگذاری مدل…</string>
+    <string name="status_model_ready">آماده · بدون نیاز به اینترنت</string>
+    <string name="status_no_model">بستهٔ زبان لازم است</string>
+    <string name="status_listening">در حال شنیدن…</string>
+    <string name="status_transcribing_file">در حال تبدیل فایل صوتی به متن · %1$d٪</string>
+    <string name="status_error">خطا</string>
+
+    <string name="mic_hint_idle">برای صحبت لمس کنید</string>
+    <string name="mic_hint_listening">در حال شنیدن · برای توقف لمس کنید</string>
+    <string name="mic_hint_no_model">ابتدا یک بستهٔ زبان اضافه کنید</string>
+    <string name="mic_hint_loading">در حال آماده‌سازی مدل…</string>
+    <string name="mic_hint_file">برای توقف لمس کنید</string>
+
+    <string name="label_transcript">متن</string>
+    <plurals name="word_count">
+        <item quantity="one">%d واژه</item>
+        <item quantity="other">%d واژه</item>
+    </plurals>
+    <string name="hint_transcript">آنچه می‌گویید اینجا نوشته می‌شود. می‌توانید متن را آزادانه ویرایش کنید.</string>
+    <string name="hint_start_speaking">صحبت کنید…</string>
+
+    <string name="action_start_listening">شروع شنیدن</string>
+    <string name="action_stop_listening">توقف شنیدن</string>
+    <string name="action_save">ذخیره</string>
+    <string name="action_share">هم‌رسانی</string>
+    <string name="action_copy">رونوشت</string>
+    <string name="action_clear">پاک کردن</string>
+    <string name="action_undo">واگرد</string>
+    <string name="action_language_packs">بسته‌های زبان</string>
+    <string name="action_ui_language">زبان برنامه</string>
+    <string name="action_transcribe_file">تبدیل فایل صوتی به متن</string>
+    <string name="action_about">درباره</string>
+    <string name="action_cancel">لغو</string>
+    <string name="action_close">بستن</string>
+    <string name="action_download">دانلود</string>
+    <string name="action_use">استفاده</string>
+    <string name="action_active">فعال</string>
+    <string name="action_delete">حذف</string>
+    <string name="action_retry">تلاش دوباره</string>
+    <string name="action_continue">ادامه</string>
+    <string name="action_import">وارد کردن</string>
+    <string name="action_import_folder">وارد کردن از پوشه</string>
+
+    <string name="copied">متن رونوشت شد</string>
+    <string name="cleared">متن پاک شد</string>
+    <string name="nothing_to_save">متنی برای ذخیره وجود ندارد</string>
+    <string name="file_saved">به‌صورت %1$s ذخیره شد</string>
+    <string name="file_failed">فایل ذخیره نشد</string>
+    <string name="dialog_export_title">ذخیره به‌عنوان</string>
+    <string name="format_txt">متن ساده (.txt)</string>
+    <string name="format_pdf">سند PDF ‏(.pdf)</string>
+    <string name="format_odt">متن OpenDocument ‏(.odt)</string>
+    <string name="format_docx">سند Word ‏(.docx)</string>
+
+    <string name="packs_title">بسته‌های زبان</string>
+    <string name="packs_subtitle">تشخیص گفتار کاملاً روی دستگاه شما و بدون اینترنت انجام می‌شود. کافی است بستهٔ زبان خود را یک بار دانلود کنید.</string>
+    <string name="packs_subtitle_offline">کافی است پوشهٔ مدل زبان خود را یک بار وارد کنید. تشخیص گفتار کاملاً روی دستگاه شما و بدون اینترنت انجام می‌شود.</string>
+    <string name="packs_play_unavailable">این نسخه از Google Play نصب نشده است، بنابراین بسته‌ها دانلود نمی‌شوند. می‌توانید پوشهٔ مدل را از دستگاه خود وارد کنید.</string>
+    <string name="pack_size">≈ %1$s</string>
+    <string name="pack_state_not_installed">دانلود نشده</string>
+    <string name="pack_state_pending">در صف…</string>
+    <string name="pack_state_downloading">در حال دانلود · %1$d٪</string>
+    <string name="pack_state_installing">در حال نصب…</string>
+    <string name="pack_state_importing">در حال وارد کردن…</string>
+    <string name="pack_state_installed">نصب شده</string>
+    <string name="pack_state_imported">از پوشه وارد شده</string>
+    <string name="pack_state_active">در حال استفاده</string>
+    <string name="pack_state_failed">دانلود ناموفق بود</string>
+    <string name="pack_state_waiting_wifi">در انتظار Wi-Fi</string>
+    <string name="pack_state_needs_confirmation">نیاز به تأیید شما</string>
+    <string name="pack_state_unavailable">از پوشه وارد کنید</string>
+    <string name="pack_large_note">مدل بزرگ</string>
+    <string name="pack_delete_title">بستهٔ %1$s حذف شود؟</string>
+    <string name="pack_delete_message">هر زمان بخواهید می‌توانید دوباره دانلودش کنید.</string>
+    <string name="pack_error_network">اتصال اینترنت برقرار نیست. پس از اتصال دوباره تلاش کنید.</string>
+    <string name="pack_error_storage">فضای خالی کافی روی دستگاه نیست.</string>
+    <string name="pack_error_generic">بسته دانلود نشد (کد %1$d).</string>
+    <string name="pack_ready_snackbar">بستهٔ %1$s آماده است</string>
+
+    <string name="import_choose_language">این مدل برای کدام زبان است؟</string>
+    <string name="import_hint">در مرحلهٔ بعد، پوشهٔ مدلی که final.mdl را دارد یا پوشهٔ BejeModels/%1$s را انتخاب کنید.</string>
+    <string name="import_failed">مدل وارد نشد: %1$s</string>
+    <string name="model_not_found">مدل معتبری در پوشه پیدا نشد (final.mdl وجود ندارد).</string>
+    <string name="model_load_failed">مدل بارگذاری نشد. بسته را حذف و دوباره دانلود کنید.</string>
+
+    <string name="error_permission_denied">اجازهٔ میکروفون داده نشد. برای تبدیل گفتار به متن به این اجازه نیاز است.</string>
+    <string name="error_mic">میکروفون راه‌اندازی نشد. ممکن است برنامهٔ دیگری از آن استفاده کند.</string>
+    <string name="error_mic_read">صدا از میکروفون خوانده نشد.</string>
+    <string name="error_recognizer">تشخیص گفتار راه‌اندازی نشد.</string>
+    <string name="error_audio_file">فایل صوتی خوانده نشد یا قالب آن پشتیبانی نمی‌شود.</string>
+    <string name="transcribe_done">فایل صوتی به متن تبدیل شد</string>
+    <string name="transcribe_cancelled">تبدیل متوقف شد</string>
+
+    <string name="dialog_ui_language">زبان برنامه</string>
+    <string name="about_title">دربارهٔ Bêje</string>
+    <string name="about_message">نسخهٔ %1$s\n\nBêje گفتار شما را کاملاً روی دستگاه به متن تبدیل می‌کند. صدا ذخیره نمی‌شود و هیچ داده‌ای از طریق اینترنت ارسال نمی‌شود. اینترنت فقط برای دانلود بسته‌های زبان از Google Play استفاده می‌شود.\n\nاجزای متن‌باز: مدل‌های Vosk و Kaldi ‏(Apache 2.0)، JNA ‏(Apache 2.0)، AndroidX و Material Components ‏(Apache 2.0).</string>
+</resources>

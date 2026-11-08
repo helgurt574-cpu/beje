@@ -1,0 +1,49 @@
+# İmzalama anahtarları asla depoya girmemeli
+keystore.properties
+*.jks
+*.keystore
+
+# Yerel ayarlar ve IDE
+local.properties
+.gradle/
+.idea/
+.kotlin/
+*.iml
+.codex
+.agents/
+
+# Derleme çıktıları
+build/
+*/build/
+desktop/bin/
+
+# Konuşma modelleri çok büyük (GitHub sınırını aşar); ayrı dağıtılır.
+# model_*/src/main/assets içindeki bağlantılar Models/ klasörünü gösterir.
+Models/
+BejeModels/
+
+# Hazır paketler ve arşivler
+Beje-Offline-*/
+beje/
+hazir/
+*.apk
+*.aab
+*.apks
+*.zip
+*.tar.gz
+
+# Geçici dosyalar
+info_-
+__pycache__/
+
+# Yerel derleme ve git dışı yedekler
+.git-yedek/
+SESSION_NOTE.md
+uygulama hakkinda.md
+Beje-Android-Kullanim-Kilavuzu.docx
+Beje-Windows-Kullanim-Kilavuzu.docx
+
+# Play Store hazırlık dosyaları (yerelde kalır)
+PLAY_STORE.md
+docs/play-store/
+branding/play/

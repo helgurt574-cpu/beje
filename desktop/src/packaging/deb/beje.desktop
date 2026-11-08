@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Bêje
+GenericName=Dictation
+Comment=Çevrimdışı dikte / Offline dictation
+Exec=/usr/bin/beje %F
+Icon=beje
+Terminal=false
+Categories=Utility;Office;Accessibility;
+Keywords=dikte;dictation;speech;konuşma;
+StartupWMClass=com-example-orato-desktop-OratoAppKt

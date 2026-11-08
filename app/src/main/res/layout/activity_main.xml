@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface">
+
+    <LinearLayout
+        android:id="@+id/contentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:menu="@menu/main_menu"
+            app:navigationContentDescription="@string/action_about"
+            app:navigationIcon="@drawable/ic_logo"
+            app:subtitle="@string/app_tagline"
+            app:subtitleTextAppearance="@style/TextAppearance.Material3.LabelMedium"
+            app:subtitleTextColor="?attr/colorOnSurfaceVariant"
+            app:title="@string/app_name"
+            app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="4dp">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/modelChip"
+                style="@style/Widget.Material3.Chip.Assist.Elevated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lang_tr"
+                app:chipIcon="@drawable/ic_translate"
+                app:chipIconTint="?attr/colorPrimary"
+                app:closeIcon="@drawable/ic_expand"
+                app:closeIconEnabled="true"
+                app:closeIconTint="?attr/colorOnSurfaceVariant" />
+
+            <TextView
+                android:id="@+id/statusTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="end"
+                android:maxLines="2"
+                android:text="@string/status_preparing"
+                android:textAppearance="?attr/textAppearanceBodySmall"
+                android:textColor="?attr/colorOnSurfaceVariant" />
+        </LinearLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/transcriptCard"
+            style="@style/Widget.Material3.CardView.Filled"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+            app:shapeAppearance="?attr/shapeAppearanceCornerExtraLarge">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="20dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="8dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_transcript"
+                            android:textAppearance="?attr/textAppearanceTitleSmall"
+                            android:textColor="?attr/colorOnSurface" />
+
+                        <TextView
+                            android:id="@+id/wordCountTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?attr/textAppearanceLabelSmall"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            tools:text="12 kelime" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/copyButton"
+                        style="?attr/materialIconButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/action_copy"
+                        android:tooltipText="@string/action_copy"
+                        app:icon="@drawable/ic_copy"
+                        app:iconTint="?attr/colorOnSurfaceVariant" />
+
+                    <Button
+                        android:id="@+id/clearButton"
+                        style="?attr/materialIconButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/action_clear"
+                        android:tooltipText="@string/action_clear"
+                        app:icon="@drawable/ic_delete"
+                        app:iconTint="?attr/colorOnSurfaceVariant" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/resultTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="top|start"
+                    android:hint="@string/hint_transcript"
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine|textCapSentences|textAutoCorrect"
+                    android:overScrollMode="ifContentScrolls"
+                    android:paddingHorizontal="20dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="20dp"
+                    android:scrollbars="vertical"
+                    android:textAlignment="textStart"
+                    android:textDirection="firstStrong"
+                    android:textAppearance="@style/TextAppearance.Beje.Transcript"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textColorHint="?attr/colorOnSurfaceVariant" />
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/fileProgress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginBottom="16dp"
+                    android:visibility="gone"
+                    app:trackCornerRadius="4dp"
+                    app:trackThickness="6dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/controlsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="12dp">
+
+            <com.example.offlinedikte.MicPulseView
+                android:id="@+id/micPulseView"
+                android:layout_width="176dp"
+                android:layout_height="176dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/toggleButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/action_start_listening"
+                app:backgroundTint="@color/brand_red"
+                app:elevation="6dp"
+                app:fabCustomSize="88dp"
+                app:layout_constraintBottom_toBottomOf="@id/micPulseView"
+                app:layout_constraintEnd_toEndOf="@id/micPulseView"
+                app:layout_constraintStart_toStartOf="@id/micPulseView"
+                app:layout_constraintTop_toTopOf="@id/micPulseView"
+                app:maxImageSize="38dp"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
+                app:srcCompat="@drawable/ic_mic"
+                app:tint="@color/on_brand" />
+
+            <Button
+                android:id="@+id/exportButton"
+                style="?attr/materialIconButtonFilledTonalStyle"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:contentDescription="@string/action_save"
+                android:tooltipText="@string/action_save"
+                app:icon="@drawable/ic_save"
+                app:iconSize="24dp"
+                app:layout_constraintBottom_toBottomOf="@id/micPulseView"
+                app:layout_constraintEnd_toStartOf="@id/micPulseView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/micPulseView" />
+
+            <Button
+                android:id="@+id/shareButton"
+                style="?attr/materialIconButtonFilledTonalStyle"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:contentDescription="@string/action_share"
+                android:tooltipText="@string/action_share"
+                app:icon="@drawable/ic_share"
+                app:iconSize="24dp"
+                app:layout_constraintBottom_toBottomOf="@id/micPulseView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/micPulseView"
+                app:layout_constraintTop_toTopOf="@id/micPulseView" />
+
+            <TextView
+                android:id="@+id/micHintTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-8dp"
+                android:gravity="center"
+                android:text="@string/mic_hint_idle"
+                android:textAppearance="?attr/textAppearanceLabelLarge"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/micPulseView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,12 @@
+#!/bin/sh
+# Bêje.app başlatıcısı: paketin içindeki Java ile çalışır.
+CONTENTS="$(cd "$(dirname "$0")/.." && pwd)"
+APP="$(cd "$CONTENTS/.." && pwd)"
+exec "$CONTENTS/runtime/bin/java" \
+  -Dfile.encoding=UTF-8 \
+  -Xdock:name="Bêje" -Xdock:icon="$CONTENTS/Resources/beje.icns" \
+  -Dapple.awt.application.appearance=system \
+  -Dbeje.home="$APP" -Dbeje.bundle="$APP" -Dbeje.launcher="$CONTENTS/MacOS/beje" \
+  -Dbeje.models="$CONTENTS/Resources/BejeModels" \
+  -Dbeje.native="$CONTENTS/app/native" -Djna.boot.library.path="$CONTENTS/app/native" \
+  -cp "$CONTENTS/app/lib/*" com.example.orato.desktop.OratoAppKt "$@"

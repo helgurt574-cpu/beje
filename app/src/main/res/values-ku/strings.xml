@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_tagline">Dîkteya bê înternet</string>
+    <string name="lang_system">Zimanê sîstemê</string>
+
+    <string name="status_preparing">Tê amadekirin…</string>
+    <string name="status_model_loading">Model tê barkirin…</string>
+    <string name="status_model_ready">Amade ye · înternet ne hewce ye</string>
+    <string name="status_no_model">Pakêta zimanî pêwîst e</string>
+    <string name="status_listening">Tê guhdarîkirin…</string>
+    <string name="status_transcribing_file">Pelê dengî tê nivîsandin · %%%1$d</string>
+    <string name="status_error">Çewtî</string>
+
+    <string name="mic_hint_idle">Ji bo axaftinê bitikîne</string>
+    <string name="mic_hint_listening">Tê guhdarîkirin · ji bo rawestandinê bitikîne</string>
+    <string name="mic_hint_no_model">Pêşî pakêteke zimanî lê zêde bike</string>
+    <string name="mic_hint_loading">Model tê amadekirin…</string>
+    <string name="mic_hint_file">Ji bo rawestandinê bitikîne</string>
+
+    <string name="label_transcript">Nivîs</string>
+    <plurals name="word_count">
+        <item quantity="one">%d peyv</item>
+        <item quantity="other">%d peyv</item>
+    </plurals>
+    <string name="hint_transcript">Tiştên ku tu dibêjî li vir dibin nivîs. Tu dikarî nivîsê bi dilê xwe sererast bikî.</string>
+    <string name="hint_start_speaking">Dest bi axaftinê bike…</string>
+
+    <string name="action_start_listening">Guhdarîkirinê dest pê bike</string>
+    <string name="action_stop_listening">Guhdarîkirinê rawestîne</string>
+    <string name="action_save">Tomar bike</string>
+    <string name="action_share">Parve bike</string>
+    <string name="action_copy">Kopî bike</string>
+    <string name="action_clear">Paqij bike</string>
+    <string name="action_undo">Vegerîne</string>
+    <string name="action_language_packs">Pakêtên zimanî</string>
+    <string name="action_ui_language">Zimanê navrûyê</string>
+    <string name="action_transcribe_file">Pelê dengî bike nivîs</string>
+    <string name="action_about">Derbarê</string>
+    <string name="action_cancel">Betal bike</string>
+    <string name="action_close">Bigire</string>
+    <string name="action_download">Daxe</string>
+    <string name="action_use">Bi kar bîne</string>
+    <string name="action_active">Çalak</string>
+    <string name="action_delete">Jê bibe</string>
+    <string name="action_retry">Dîsa biceribîne</string>
+    <string name="action_continue">Bidomîne</string>
+    <string name="action_import">Bîne</string>
+    <string name="action_import_folder">Ji peldankê bîne</string>
+
+    <string name="copied">Nivîs hat kopîkirin</string>
+    <string name="cleared">Nivîs hat paqijkirin</string>
+    <string name="nothing_to_save">Nivîsek ji bo tomarkirinê tune</string>
+    <string name="file_saved">Wekî %1$s hat tomarkirin</string>
+    <string name="file_failed">Pel nehat tomarkirin</string>
+    <string name="dialog_export_title">Tomar bike wekî</string>
+    <string name="format_txt">Nivîsa sade (.txt)</string>
+    <string name="format_pdf">Belgeya PDF (.pdf)</string>
+    <string name="format_odt">Nivîsa OpenDocument (.odt)</string>
+    <string name="format_docx">Belgeya Word (.docx)</string>
+
+    <string name="packs_title">Pakêtên zimanî</string>
+    <string name="packs_subtitle">Naskirina axaftinê bi tevahî li ser cîhaza te û bê înternet dixebite. Pakêta zimanê xwe tenê carekê daxe.</string>
+    <string name="packs_subtitle_offline">Peldanka modela zimanê xwe tenê carekê bîne. Naskirina axaftinê bi tevahî li ser cîhaza te û bê înternet dixebite.</string>
+    <string name="packs_play_unavailable">Ev sazkirin ne ji Google Play hatiye, ji ber vê yekê pakêt nayên daxistin. Tu dikarî peldanka modelê ji cîhaza xwe bînî.</string>
+    <string name="pack_size">≈ %1$s</string>
+    <string name="pack_state_not_installed">Nehatiye daxistin</string>
+    <string name="pack_state_pending">Di rêzê de…</string>
+    <string name="pack_state_downloading">Tê daxistin · %%%1$d</string>
+    <string name="pack_state_installing">Tê sazkirin…</string>
+    <string name="pack_state_importing">Tê anîn…</string>
+    <string name="pack_state_installed">Sazkirî ye</string>
+    <string name="pack_state_imported">Ji peldankê hat anîn</string>
+    <string name="pack_state_active">Tê bikaranîn</string>
+    <string name="pack_state_failed">Daxistin bi ser neket</string>
+    <string name="pack_state_waiting_wifi">Li benda Wi-Fi</string>
+    <string name="pack_state_needs_confirmation">Erêkirina te pêwîst e</string>
+    <string name="pack_state_unavailable">Ji peldankê bîne</string>
+    <string name="pack_large_note">modela mezin</string>
+    <string name="pack_delete_title">Pakêta %1$s were jêbirin?</string>
+    <string name="pack_delete_message">Tu dikarî her dem dîsa daxî.</string>
+    <string name="pack_error_network">Girêdana înternetê tune. Piştî girêdanê dîsa biceribîne.</string>
+    <string name="pack_error_storage">Di cîhazê de cihê vala têrê nake.</string>
+    <string name="pack_error_generic">Pakêt nehat daxistin (kod %1$d).</string>
+    <string name="pack_ready_snackbar">Pakêta %1$s amade ye</string>
+
+    <string name="import_choose_language">Model ji bo kîjan zimanî ye?</string>
+    <string name="import_hint">Paşê peldanka modelê ya ku final.mdl tê de ye, an jî peldanka BejeModels/%1$s hilbijêre.</string>
+    <string name="import_failed">Model nehat anîn: %1$s</string>
+    <string name="model_not_found">Di peldankê de modeleke derbasdar nehat dîtin (final.mdl tune).</string>
+    <string name="model_load_failed">Model nehat barkirin. Pakêtê jê bibe û dîsa daxe.</string>
+
+    <string name="error_permission_denied">Destûra mîkrofonê nehat dayîn. Ji bo ku axaftin bibe nivîs, destûra mîkrofonê pêwîst e.</string>
+    <string name="error_mic">Mîkrofon dest pê nekir. Dibe ku sepaneke din wê bi kar tîne.</string>
+    <string name="error_mic_read">Deng ji mîkrofonê nehat xwendin.</string>
+    <string name="error_recognizer">Naskirina axaftinê dest pê nekir.</string>
+    <string name="error_audio_file">Pelê dengî nehat xwendin an jî ev format nayê piştgirîkirin.</string>
+    <string name="transcribe_done">Pelê dengî bû nivîs</string>
+    <string name="transcribe_cancelled">Nivîsandin hat rawestandin</string>
+
+    <string name="dialog_ui_language">Zimanê navrûyê</string>
+    <string name="about_title">Derbarê Bêje</string>
+    <string name="about_message">Guherto %1$s\n\nBêje axaftina te bi tevahî li ser cîhazê dike nivîs. Deng nayê tomarkirin û tu dane ji înternetê re nayê şandin. Înternet tenê ji bo daxistina pakêtên zimanî ji Google Play tê bikaranîn.\n\nPêkhateyên çavkaniya vekirî: modelên Vosk û Kaldi (Apache 2.0), JNA (Apache 2.0), AndroidX û Material Components (Apache 2.0).</string>
+</resources>

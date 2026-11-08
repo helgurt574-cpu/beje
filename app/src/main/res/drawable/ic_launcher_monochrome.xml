@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- branding/generate_icons.py tarafından üretildi; elle düzenlemeyin. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path android:strokeColor="#FFFFFFFF" android:strokeWidth="2.8" android:strokeLineCap="round"
+        android:pathData="M54,29 L54,23 M61.37,30.11 L63.14,24.38 M68.08,33.34 L71.46,28.39 M73.55,38.41 L78.24,34.67 M77.27,44.87 L82.86,42.67 M78.93,52.13 L84.91,51.68 M78.37,59.56 L84.22,60.9 M75.65,66.5 L80.85,69.5 M71,72.33 L75.09,76.72 M64.85,76.52 L67.45,81.93 M57.73,78.72 L58.62,84.65 M50.27,78.72 L49.38,84.65 M43.15,76.52 L40.55,81.93 M37,72.33 L32.91,76.72 M32.35,66.5 L27.15,69.5 M29.63,59.56 L23.78,60.9 M29.07,52.13 L23.09,51.68 M30.73,44.87 L25.14,42.67 M34.45,38.41 L29.76,34.67 M39.92,33.34 L36.54,28.39 M46.63,30.11 L44.86,24.38" />
+    <path android:fillColor="#FFFFFFFF" android:pathData="M49,46.5 a5,5 0 0,1 10,0 L59,53.5 a5,5 0 0,1 -10,0 Z" />
+    <path android:strokeColor="#FFFFFFFF" android:strokeWidth="2.6" android:strokeLineCap="round"
+        android:pathData="M45,53 a9,9 0 0,0 18,0 M54,62 L54,66.5 M49.5,66.5 L58.5,66.5" />
+</vector>

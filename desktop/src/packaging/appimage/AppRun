@@ -1,0 +1,15 @@
+#!/bin/sh
+# Bêje AppImage başlatıcısı. Modeller, AppImage dosyasının yanındaki BejeModels klasöründe aranır.
+HERE="$(dirname "$(readlink -f "$0")")"
+if [ -n "$APPIMAGE" ]; then
+  BASE="$(dirname "$APPIMAGE")"
+  LAUNCHER="$APPIMAGE"
+else
+  BASE="$HERE"
+  LAUNCHER="$HERE/AppRun"
+fi
+exec "$HERE/runtime/bin/java" \
+  -Dfile.encoding=UTF-8 -Dawt.useSystemAAFontSettings=on \
+  -Dbeje.home="$BASE" -Dbeje.launcher="$LAUNCHER" -Dbeje.models="$HERE/BejeModels" \
+  -Dbeje.native="$HERE/app/native" -Djna.boot.library.path="$HERE/app/native" \
+  -cp "$HERE/app/lib/*" com.example.orato.desktop.OratoAppKt "$@"

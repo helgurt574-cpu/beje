@@ -1,0 +1,430 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+    id 'application'
+}
+
+def bejeVersion = '1.1.0'
+
+// Her platform için gömülecek Java (Eclipse Temurin JRE 21). Paketler kurulum ya da internet gerektirmez.
+def temurinBase = 'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13%2B9'
+def jres = [
+    'windows-x64'  : "$temurinBase/OpenJDK21U-jre_x64_windows_hotspot_21.0.13_9.zip",
+    'linux-x64'    : "$temurinBase/OpenJDK21U-jre_x64_linux_hotspot_21.0.13_9.tar.gz",
+    'macos-aarch64': "$temurinBase/OpenJDK21U-jre_aarch64_mac_hotspot_21.0.13_9.tar.gz",
+    'macos-x64'    : "$temurinBase/OpenJDK21U-jre_x64_mac_hotspot_21.0.13_9.tar.gz",
+]
+
+application {
+    mainClass = 'com.example.orato.desktop.OratoAppKt'
+    applicationName = 'beje'
+}
+
+// Vosk jar'ı, özgün LibVosk sınıfı çıkarılarak yeniden paketlenir; yerine
+// src/main/java/org/vosk/LibVosk.java gelir (yerel kütüphaneyi paketin içinden yükler).
+configurations {
+    voskOriginal { transitive = false }
+}
+
+def repackedVosk = file("$buildDir/vosk/vosk-0.3.45-beje.jar")
+
+tasks.register('repackVosk', Jar) {
+    archiveFileName = repackedVosk.name
+    destinationDirectory = repackedVosk.parentFile
+    from({ zipTree(configurations.voskOriginal.singleFile) }) {
+        exclude 'org/vosk/LibVosk.class'
+    }
+}
+
+dependencies {
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib'
+    voskOriginal 'com.alphacephei:vosk:0.3.45'
+    implementation files(repackedVosk) { builtBy 'repackVosk' }
+    implementation 'net.java.dev.jna:jna:5.18.1'
+    implementation 'net.java.dev.jna:jna-platform:5.18.1'
+    implementation 'org.json:json:20240303'
+    implementation 'org.apache.pdfbox:pdfbox:3.0.3'
+    implementation 'com.formdev:flatlaf:3.7.2'
+    implementation 'com.formdev:flatlaf-extras:3.7.2'
+}
+
+tasks.named('processResources') {
+    from('src/main/resources/beje_icon_full.png') {
+        into 'icons'
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 17
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile).configureEach {
+    compilerOptions.jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+}
+
+tasks.withType(JavaExec).configureEach {
+    workingDir = rootDir
+}
+
+def distDir = file("$buildDir/dist")
+def appLibDir = file("$buildDir/install/beje/lib")
+
+// --- Java runtime'ları -------------------------------------------------------
+
+jres.each { platform, url ->
+    def taskSuffix = platform.split('-').collect { it.capitalize() }.join('')
+    def archive = file("$buildDir/jre-cache/${url.substring(url.lastIndexOf('/') + 1)}")
+    def extractDir = file("$buildDir/jre/$platform")
+
+    tasks.register("downloadJre$taskSuffix") {
+        group = 'distribution'
+        outputs.file(archive)
+        onlyIf { !archive.exists() }
+        doLast {
+            archive.parentFile.mkdirs()
+            exec { commandLine 'curl', '-L', '--fail', '--retry', '5', '-C', '-', '-o', archive.absolutePath, url }
+        }
+    }
+
+    tasks.register("extractJre$taskSuffix") {
+        group = 'distribution'
+        dependsOn "downloadJre$taskSuffix"
+        inputs.file(archive)
+        outputs.dir(extractDir)
+        doLast {
+            delete extractDir
+            extractDir.mkdirs()
+            if (archive.name.endsWith('.zip')) {
+                exec { commandLine 'unzip', '-q', archive.absolutePath, '-d', extractDir.absolutePath }
+            } else {
+                exec { commandLine 'tar', '-xzf', archive.absolutePath, '-C', extractDir.absolutePath }
+            }
+        }
+    }
+}
+
+/** Çıkarılan JRE'nin "home" klasörü (macOS'ta Contents/Home). */
+def jreHome = { String platform ->
+    def root = file("$buildDir/jre/$platform").listFiles()?.find { it.isDirectory() }
+    if (root == null) throw new GradleException("JRE bulunamadı: $platform")
+    def macHome = new File(root, 'Contents/Home')
+    return macHome.isDirectory() ? macHome : root
+}
+
+/** İzinleri ve sembolik bağlantıları koruyarak kopyalar. */
+def copyTree = { File from, File to ->
+    to.parentFile.mkdirs()
+    project.exec { commandLine 'cp', '-a', from.absolutePath, to.absolutePath }
+}
+
+// --- Gömülü konuşma modelleri ---------------------------------------------------
+
+// Masaüstü paketleri modelleri içinde taşır; kullanıcı ayrıca BejeModels kopyalamaz.
+def speechModels = [
+    tr: rootProject.file('Models/tr/vosk-model-small-tr-0.3'),
+    fa: rootProject.file('Models/fa/vosk-model-small-fa-0.42'),
+    ar: rootProject.file('Models/ar/vosk-model-ar-mgb2-0.4'),
+]
+
+/**
+ * Vosk ve JNA'nın yerel kütüphanelerini jar'lardan çıkarıp pakete hazır koyar
+ * (app/native). Uygulama bunları tam yoluyla yükler; çalışırken geçici klasöre çıkarma yapılmaz.
+ */
+def copyNatives = { String platform, File target ->
+    def voskJar = configurations.voskOriginal.singleFile
+    def jnaJar = configurations.runtimeClasspath.files.find { it.name.startsWith('jna-') && !it.name.contains('platform') }
+    def specs = [
+        'windows-x64'  : [vosk: 'win32-x86-64/', jna: 'com/sun/jna/win32-x86-64/'],
+        'linux-x64'    : [vosk: 'linux-x86-64/', jna: 'com/sun/jna/linux-x86-64/'],
+        'macos-aarch64': [vosk: 'darwin/', jna: 'com/sun/jna/darwin-aarch64/'],
+        'macos-x64'    : [vosk: 'darwin/', jna: 'com/sun/jna/darwin-x86-64/'],
+    ][platform]
+    target.mkdirs()
+    [[voskJar, specs.vosk], [jnaJar, specs.jna]].each { pair ->
+        def (jar, prefix) = pair
+        project.copy {
+            from(zipTree(jar)) {
+                include "${prefix}*.dll", "${prefix}*.so", "${prefix}*.dylib", "${prefix}*.jnilib"
+                eachFile { it.path = it.name }
+            }
+            into target
+            includeEmptyDirs = false
+        }
+    }
+}
+
+def copyModels = { File target ->
+    speechModels.each { code, dir ->
+        if (!dir.isDirectory()) throw new GradleException("Model bulunamadı: $dir")
+        project.copy {
+            from dir
+            into new File(target, code)
+            exclude 'test/**'
+        }
+    }
+}
+
+// --- Windows -----------------------------------------------------------------
+
+def windowsLauncherExe = file("$buildDir/windows-launcher/Beje.exe")
+
+tasks.register('buildWindowsLauncher') {
+    group = 'distribution'
+    description = 'Beje.exe başlatıcısını mingw ile derler (simge gömülü).'
+    inputs.files('src/windowsLauncher/orato_launcher.c', 'src/windowsLauncher/launcher.rc', 'src/main/resources/icons/orato.ico')
+    outputs.file(windowsLauncherExe)
+    doLast {
+        def workDir = windowsLauncherExe.parentFile
+        workDir.mkdirs()
+        copy {
+            from 'src/main/resources/icons/orato.ico', 'src/windowsLauncher/launcher.rc'
+            into workDir
+        }
+        exec {
+            workingDir workDir
+            commandLine 'x86_64-w64-mingw32-windres', 'launcher.rc', '-O', 'coff', '-o', 'launcher_res.o'
+        }
+        exec {
+            commandLine 'x86_64-w64-mingw32-gcc', file('src/windowsLauncher/orato_launcher.c').absolutePath,
+                new File(workDir, 'launcher_res.o').absolutePath,
+                '-municode', '-mwindows', '-O2', '-s', '-o', windowsLauncherExe.absolutePath
+        }
+    }
+}
+
+tasks.register('assembleWindows') {
+    group = 'distribution'
+    description = 'Windows x64 için taşınabilir klasör (Beje.exe + gömülü Java).'
+    dependsOn 'installDist', 'extractJreWindowsX64', 'buildWindowsLauncher'
+    doLast {
+        def root = new File(distDir, 'windows-x64/Beje')
+        delete root.parentFile
+        root.mkdirs()
+        copy { from windowsLauncherExe; into root }
+        copy { from appLibDir; into new File(root, 'app/lib') }
+        copyTree(jreHome('windows-x64'), new File(root, 'runtime'))
+        copyNatives('windows-x64', new File(root, 'app/native'))
+        copyModels(new File(root, 'BejeModels'))
+    }
+}
+
+def hasMakensis = ['sh', '-c', 'command -v makensis'].execute().waitFor() == 0
+
+tasks.register('buildWindowsInstaller') {
+    group = 'distribution'
+    description = 'Windows kurulum sihirbazı (Beje-Setup.exe). NSIS gerekir: sudo apt install nsis'
+    dependsOn 'assembleWindows'
+    onlyIf { hasMakensis }
+    doLast {
+        def source = new File(distDir, 'windows-x64/Beje')
+        def output = new File(distDir, "windows-x64/Beje-$bejeVersion-Windows-Setup.exe")
+        def sizeKb = (source.directorySize() / 1024).longValue()
+        def script = new File(distDir, 'windows-x64/installer.nsi')
+        script.text = file('src/packaging/windows/installer.nsi').getText('UTF-8')
+            .replace('@VERSION@', bejeVersion)
+            .replace('@OUTFILE@', output.absolutePath)
+            .replace('@ICON@', file('src/main/resources/icons/orato.ico').absolutePath)
+            .replace('@SRCDIR@', source.absolutePath)
+            .replace('@SIZEKB@', sizeKb.toString())
+        exec { commandLine 'makensis', '-V2', '-INPUTCHARSET', 'UTF8', script.absolutePath }
+    }
+}
+
+// --- Linux -------------------------------------------------------------------
+
+tasks.register('assembleLinux') {
+    group = 'distribution'
+    description = 'Linux x64 için taşınabilir klasör (beje başlatıcısı + gömülü Java).'
+    dependsOn 'installDist', 'extractJreLinuxX64'
+    doLast {
+        def root = new File(distDir, 'linux-x64/Beje')
+        delete root.parentFile
+        root.mkdirs()
+        copy { from 'src/packaging/linux'; into root }
+        copy { from 'src/main/resources/icons/beje_round.png'; into root; rename { 'beje.png' } }
+        copy { from appLibDir; into new File(root, 'app/lib') }
+        copyTree(jreHome('linux-x64'), new File(root, 'runtime'))
+        copyModels(new File(root, 'BejeModels'))
+        copyNatives('linux-x64', new File(root, 'app/native'))
+        ['beje', 'install.sh', 'uninstall.sh'].each { new File(root, it).setExecutable(true, false) }
+    }
+}
+
+// --- Linux .deb ----------------------------------------------------------------
+
+tasks.register('assembleDeb') {
+    group = 'distribution'
+    description = 'Debian/Ubuntu/Mint için beje_<sürüm>_amd64.deb (Java ve modeller dahil).'
+    dependsOn 'installDist', 'extractJreLinuxX64'
+    doLast {
+        def work = new File(distDir, 'deb')
+        def root = new File(work, 'beje')
+        delete work
+        def opt = new File(root, 'opt/beje')
+        opt.mkdirs()
+        copy { from 'src/packaging/linux/beje'; into opt }
+        copy { from appLibDir; into new File(opt, 'app/lib') }
+        copyTree(jreHome('linux-x64'), new File(opt, 'runtime'))
+        copyNatives('linux-x64', new File(opt, 'app/native'))
+        copyModels(new File(opt, 'BejeModels'))
+        new File(opt, 'beje').setExecutable(true, false)
+
+        def bin = new File(root, 'usr/bin')
+        bin.mkdirs()
+        exec { commandLine 'ln', '-s', '/opt/beje/beje', new File(bin, 'beje').absolutePath }
+        copy { from 'src/packaging/deb/beje.desktop'; into new File(root, 'usr/share/applications') }
+        copy {
+            from 'src/main/resources/icons/beje_round.png'
+            into new File(root, 'usr/share/icons/hicolor/256x256/apps')
+            rename { 'beje.png' }
+        }
+
+        def debian = new File(root, 'DEBIAN')
+        debian.mkdirs()
+        def sizeKb = (opt.directorySize() / 1024).longValue()
+        new File(debian, 'control').text = file('src/packaging/deb/control').getText('UTF-8')
+            .replace('@VERSION@', bejeVersion).replace('@SIZE@', sizeKb.toString())
+        ['postinst', 'postrm'].each { name ->
+            copy { from "src/packaging/deb/$name"; into debian }
+            new File(debian, name).setExecutable(true, false)
+        }
+        exec { commandLine 'chmod', '-R', 'go-w', root.absolutePath }
+        exec {
+            commandLine 'dpkg-deb', '--root-owner-group', '-Zxz', '--build', root.absolutePath,
+                new File(work, "beje_${bejeVersion}_amd64.deb").absolutePath
+        }
+        delete root
+    }
+}
+
+// --- Linux AppImage -----------------------------------------------------------
+
+// AppImage = resmi AppImage başlangıç dosyası (type2-runtime) + uygulamanın squashfs görüntüsü.
+// Statik çalışma zamanı sayesinde hedef sistemde libfuse2 gerekmez (Ubuntu 22.04+, Fedora...).
+def appImageRuntime = file("$buildDir/tools/appimage-runtime-x86_64")
+
+tasks.register('downloadAppImageRuntime') {
+    group = 'distribution'
+    outputs.file(appImageRuntime)
+    onlyIf { !appImageRuntime.exists() }
+    doLast {
+        appImageRuntime.parentFile.mkdirs()
+        exec { commandLine 'curl', '-L', '--fail', '--retry', '5', '-o', appImageRuntime.absolutePath,
+            'https://github.com/AppImage/type2-runtime/releases/download/20251108/runtime-x86_64' }
+    }
+}
+
+tasks.register('assembleAppImage') {
+    group = 'distribution'
+    description = 'Linux x64 için tek dosyalık Beje-x86_64.AppImage (gömülü Java). mksquashfs gerekir.'
+    dependsOn 'installDist', 'extractJreLinuxX64', 'downloadAppImageRuntime'
+    doLast {
+        def work = new File(distDir, 'appimage')
+        def appDir = new File(work, 'Beje.AppDir')
+        delete work
+        appDir.mkdirs()
+        copy { from 'src/packaging/appimage'; into appDir }
+        copy { from 'src/main/resources/icons/beje_round.png'; into appDir; rename { 'beje.png' } }
+        copy { from appLibDir; into new File(appDir, 'app/lib') }
+        copyTree(jreHome('linux-x64'), new File(appDir, 'runtime'))
+        copyNatives('linux-x64', new File(appDir, 'app/native'))
+        copyModels(new File(appDir, 'BejeModels'))
+        new File(appDir, 'AppRun').setExecutable(true, false)
+        exec { commandLine 'ln', '-sf', 'beje.png', new File(appDir, '.DirIcon').absolutePath }
+
+        def squash = new File(work, 'beje.squashfs')
+        exec {
+            commandLine 'mksquashfs', appDir.absolutePath, squash.absolutePath,
+                '-root-owned', '-noappend', '-no-xattrs', '-comp', 'zstd', '-b', '1M', '-quiet'
+        }
+        def output = new File(work, "Beje-$bejeVersion-x86_64.AppImage")
+        output.withOutputStream { out ->
+            appImageRuntime.withInputStream { out << it }
+            squash.withInputStream { out << it }
+        }
+        output.setExecutable(true, false)
+        squash.delete()
+    }
+}
+
+// --- macOS -------------------------------------------------------------------
+
+['aarch64': 'MacosAarch64', 'x64': 'MacosX64'].each { arch, suffix ->
+    tasks.register("assemble$suffix") {
+        group = 'distribution'
+        description = "macOS ($arch) için Beje.app (gömülü Java)."
+        dependsOn 'installDist', "extractJre$suffix"
+        doLast {
+            def app = new File(distDir, "macos-$arch/Beje.app")
+            delete app.parentFile
+            def contents = new File(app, 'Contents')
+            new File(contents, 'MacOS').mkdirs()
+            new File(contents, 'Resources').mkdirs()
+            copy { from 'src/packaging/macos/beje'; into new File(contents, 'MacOS') }
+            copy {
+                from 'src/packaging/macos/Info.plist'
+                into contents
+                filter { it.replace('@VERSION@', bejeVersion) }
+            }
+            copy { from rootProject.file('branding/beje.icns'); into new File(contents, 'Resources') }
+            copy { from appLibDir; into new File(contents, 'app/lib') }
+            copyTree(jreHome("macos-$arch"), new File(contents, 'runtime'))
+            copyNatives("macos-$arch", new File(contents, 'app/native'))
+            copyModels(new File(contents, 'Resources/BejeModels'))
+            new File(contents, 'MacOS/beje').setExecutable(true, false)
+            new File(contents, 'PkgInfo').text = 'APPL????'
+        }
+    }
+}
+
+// macOS .pkg kurulum sihirbazı: Beje.app'i /Applications'a kurar. mkbom (bomutils) gerekir;
+// PATH'te yoksa -Pmkbom=/yol/mkbom ile verilebilir.
+def mkbomTool = project.findProperty('mkbom') ?: (['sh', '-c', 'command -v mkbom'].execute().text.trim() ?:
+    "${System.getProperty('user.home')}/bomutils/build/bin/mkbom")
+
+['aarch64': ['MacosAarch64', 'arm64', 'AppleSilicon'], 'x64': ['MacosX64', 'x86_64', 'Intel']].each { arch, info ->
+    def (suffix, pkgArch, label) = info
+    tasks.register("buildMacPkg$suffix") {
+        group = 'distribution'
+        description = "macOS ($label) .pkg kurulum sihirbazı."
+        dependsOn "assemble$suffix"
+        doLast {
+            if (!new File(mkbomTool).canExecute() && !mkbomTool.toString().equals('mkbom')) {
+                throw new GradleException("mkbom bulunamadı: $mkbomTool (bomutils derleyin ya da -Pmkbom verin)")
+            }
+            exec {
+                commandLine 'python3', file('src/packaging/macos/build_pkg.py').absolutePath,
+                    '--app', new File(distDir, "macos-$arch/Beje.app").absolutePath,
+                    '--out', new File(distDir, "macos-$arch/Beje-$bejeVersion-macOS-${label}.pkg").absolutePath,
+                    '--version', bejeVersion, '--arch', pkgArch, '--mkbom', mkbomTool.toString()
+            }
+        }
+    }
+}
+
+// --- Hepsi -------------------------------------------------------------------
+
+tasks.register('packageAllDesktop') {
+    group = 'distribution'
+    description = 'Windows, Linux ve macOS paketlerini build/dist/packages altında arşivler.'
+    dependsOn 'assembleWindows', 'buildWindowsInstaller', 'assembleLinux', 'assembleDeb', 'assembleAppImage',
+        'buildMacPkgMacosAarch64', 'buildMacPkgMacosX64'
+    doLast {
+        def out = new File(distDir, 'packages')
+        delete out
+        out.mkdirs()
+        copy { from new File(distDir, 'appimage'); include '*.AppImage'; into out }
+        copy { from new File(distDir, 'deb'); include '*.deb'; into out }
+        copy { from new File(distDir, 'windows-x64'); include '*-Setup.exe'; into out }
+        exec {
+            workingDir new File(distDir, 'windows-x64')
+            commandLine 'zip', '-qr', new File(out, "Beje-$bejeVersion-Windows-x64-portable.zip").absolutePath, 'Beje'
+        }
+        exec {
+            workingDir new File(distDir, 'linux-x64')
+            commandLine 'tar', '-czf', new File(out, "Beje-$bejeVersion-Linux-x64.tar.gz").absolutePath, 'Beje'
+        }
+        ['aarch64', 'x64'].each { arch ->
+            copy { from new File(distDir, "macos-$arch"); include '*.pkg'; into out }
+        }
+    }
+}

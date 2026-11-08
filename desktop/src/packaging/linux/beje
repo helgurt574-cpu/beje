@@ -1,0 +1,8 @@
+#!/bin/sh
+# Bêje başlatıcısı: yanındaki gömülü Java ile çalışır, kurulum gerektirmez.
+HERE="$(dirname "$(readlink -f "$0")")"
+exec "$HERE/runtime/bin/java" \
+  -Dfile.encoding=UTF-8 -Dawt.useSystemAAFontSettings=on \
+  -Dbeje.home="$HERE" -Dbeje.launcher="$HERE/beje" \
+  -Dbeje.native="$HERE/app/native" -Djna.boot.library.path="$HERE/app/native" \
+  -cp "$HERE/app/lib/*" com.example.orato.desktop.OratoAppKt "$@"

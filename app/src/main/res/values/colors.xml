@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Bêje marka renkleri: simgedeki kırmızı zemin, sarı güneş ve yeşil -->
+    <color name="brand_red">#E63946</color>
+    <color name="brand_red_dark">#B7212F</color>
+    <color name="brand_sun">#FFC83D</color>
+    <color name="brand_green">#2A9D4A</color>
+    <color name="on_brand">#FFFFFF</color>
+
+    <color name="md_primary">#B6202E</color>
+    <color name="md_on_primary">#FFFFFF</color>
+    <color name="md_primary_container">#FFDAD8</color>
+    <color name="md_on_primary_container">#410007</color>
+    <color name="md_secondary">#7A5900</color>
+    <color name="md_on_secondary">#FFFFFF</color>
+    <color name="md_secondary_container">#FFDF9E</color>
+    <color name="md_on_secondary_container">#261A00</color>
+    <color name="md_tertiary">#1F6C33</color>
+    <color name="md_on_tertiary">#FFFFFF</color>
+    <color name="md_tertiary_container">#A7F5AD</color>
+    <color name="md_on_tertiary_container">#002109</color>
+    <color name="md_error">#BA1A1A</color>
+    <color name="md_on_error">#FFFFFF</color>
+    <color name="md_error_container">#FFDAD6</color>
+    <color name="md_on_error_container">#410002</color>
+    <color name="md_surface">#FFF8F6</color>
+    <color name="md_on_surface">#231918</color>
+    <color name="md_surface_variant">#F5DDDB</color>
+    <color name="md_on_surface_variant">#534341</color>
+    <color name="md_outline">#857371</color>
+    <color name="md_outline_variant">#D8C2BF</color>
+    <color name="md_surface_container_lowest">#FFFFFF</color>
+    <color name="md_surface_container_low">#FFF0EE</color>
+    <color name="md_surface_container">#FCEAE8</color>
+    <color name="md_surface_container_high">#F6E4E2</color>
+    <color name="md_surface_container_highest">#F0DEDC</color>
+    <color name="md_surface_dim">#E8D6D4</color>
+    <color name="md_surface_bright">#FFF8F6</color>
+    <color name="md_inverse_surface">#392E2D</color>
+    <color name="md_inverse_on_surface">#FFEDEB</color>
+    <color name="md_inverse_primary">#FFB3AF</color>
+</resources>

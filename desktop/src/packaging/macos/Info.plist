@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>CFBundleName</key><string>Bêje</string>
+  <key>CFBundleDisplayName</key><string>Bêje</string>
+  <key>CFBundleIdentifier</key><string>org.beje.app</string>
+  <key>CFBundleVersion</key><string>@VERSION@</string>
+  <key>CFBundleShortVersionString</key><string>@VERSION@</string>
+  <key>CFBundleExecutable</key><string>beje</string>
+  <key>CFBundleIconFile</key><string>beje.icns</string>
+  <key>CFBundlePackageType</key><string>APPL</string>
+  <key>LSMinimumSystemVersion</key><string>11.0</string>
+  <key>NSHighResolutionCapable</key><true/>
+  <key>NSSupportsAutomaticGraphicsSwitching</key><true/>
+  <key>NSMicrophoneUsageDescription</key><string>Bêje konuşmanızı bilgisayarınızda yazıya dökmek için mikrofonu kullanır. / Bêje uses the microphone to transcribe your speech on this Mac.</string>
+  <key>NSAppleEventsUsageDescription</key><string>Bêje, tanınan metni diğer uygulamalara yazmak için kullanır. / Used to type recognized text into other apps.</string>
+</dict>
+</plist>

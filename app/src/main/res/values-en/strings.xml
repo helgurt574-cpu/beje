@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_tagline">Offline dictation</string>
+    <string name="lang_system">System language</string>
+
+    <string name="status_preparing">Preparing…</string>
+    <string name="status_model_loading">Loading model…</string>
+    <string name="status_model_ready">Ready · no internet needed</string>
+    <string name="status_no_model">Language pack required</string>
+    <string name="status_listening">Listening…</string>
+    <string name="status_transcribing_file">Transcribing audio file · %1$d%%</string>
+    <string name="status_error">Error</string>
+
+    <string name="mic_hint_idle">Tap to speak</string>
+    <string name="mic_hint_listening">Listening · tap to stop</string>
+    <string name="mic_hint_no_model">Add a language pack first</string>
+    <string name="mic_hint_loading">Preparing model…</string>
+    <string name="mic_hint_file">Tap to stop</string>
+
+    <string name="label_transcript">Text</string>
+    <plurals name="word_count">
+        <item quantity="one">%d word</item>
+        <item quantity="other">%d words</item>
+    </plurals>
+    <string name="hint_transcript">What you say appears here. You can edit the text freely.</string>
+    <string name="hint_start_speaking">Start speaking…</string>
+
+    <string name="action_start_listening">Start listening</string>
+    <string name="action_stop_listening">Stop listening</string>
+    <string name="action_save">Save</string>
+    <string name="action_share">Share</string>
+    <string name="action_copy">Copy</string>
+    <string name="action_clear">Clear</string>
+    <string name="action_undo">Undo</string>
+    <string name="action_language_packs">Language packs</string>
+    <string name="action_ui_language">App language</string>
+    <string name="action_transcribe_file">Transcribe audio file</string>
+    <string name="action_about">About</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_close">Close</string>
+    <string name="action_download">Download</string>
+    <string name="action_use">Use</string>
+    <string name="action_active">Active</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_retry">Retry</string>
+    <string name="action_continue">Continue</string>
+    <string name="action_import">Import</string>
+    <string name="action_import_folder">Import from folder</string>
+
+    <string name="copied">Text copied</string>
+    <string name="cleared">Text cleared</string>
+    <string name="nothing_to_save">There is no text to save</string>
+    <string name="file_saved">Saved as %1$s</string>
+    <string name="file_failed">Could not save the file</string>
+    <string name="dialog_export_title">Save as</string>
+    <string name="format_txt">Plain text (.txt)</string>
+    <string name="format_pdf">PDF document (.pdf)</string>
+    <string name="format_odt">OpenDocument text (.odt)</string>
+    <string name="format_docx">Word document (.docx)</string>
+
+    <string name="packs_title">Language packs</string>
+    <string name="packs_subtitle">Speech recognition runs entirely on your device, without internet. Download the pack for your language once.</string>
+    <string name="packs_subtitle_offline">Import the model folder for your language once. Speech recognition runs entirely on your device, without internet.</string>
+    <string name="packs_play_unavailable">This copy was not installed from Google Play, so packs cannot be downloaded. You can import a model folder from your device instead.</string>
+    <string name="pack_size">≈ %1$s</string>
+    <string name="pack_state_not_installed">Not downloaded</string>
+    <string name="pack_state_pending">Queued…</string>
+    <string name="pack_state_downloading">Downloading · %1$d%%</string>
+    <string name="pack_state_installing">Installing…</string>
+    <string name="pack_state_importing">Importing…</string>
+    <string name="pack_state_installed">Installed</string>
+    <string name="pack_state_imported">Imported from folder</string>
+    <string name="pack_state_active">In use</string>
+    <string name="pack_state_failed">Download failed</string>
+    <string name="pack_state_waiting_wifi">Waiting for Wi-Fi</string>
+    <string name="pack_state_needs_confirmation">Needs your confirmation</string>
+    <string name="pack_state_unavailable">Import from folder</string>
+    <string name="pack_large_note">large model</string>
+    <string name="pack_delete_title">Delete the %1$s pack?</string>
+    <string name="pack_delete_message">You can download it again at any time.</string>
+    <string name="pack_error_network">No internet connection. Try again once you are online.</string>
+    <string name="pack_error_storage">Not enough free space on the device.</string>
+    <string name="pack_error_generic">Could not download the pack (code %1$d).</string>
+    <string name="pack_ready_snackbar">%1$s pack is ready</string>
+
+    <string name="import_choose_language">Which language is the model for?</string>
+    <string name="import_hint">Next, choose the model folder that contains final.mdl, or the BejeModels/%1$s folder.</string>
+    <string name="import_failed">Could not import the model: %1$s</string>
+    <string name="model_not_found">No valid model found in the folder (final.mdl is missing).</string>
+    <string name="model_load_failed">Could not load the model. Try deleting and downloading the pack again.</string>
+
+    <string name="error_permission_denied">Microphone permission was denied. It is required to turn speech into text.</string>
+    <string name="error_mic">Could not start the microphone. Another app may be using it.</string>
+    <string name="error_mic_read">Could not read audio from the microphone.</string>
+    <string name="error_recognizer">Could not start speech recognition.</string>
+    <string name="error_audio_file">The audio file could not be read or its format is not supported.</string>
+    <string name="transcribe_done">Audio file transcribed</string>
+    <string name="transcribe_cancelled">Transcription stopped</string>
+
+    <string name="dialog_ui_language">App language</string>
+    <string name="about_title">About Bêje</string>
+    <string name="about_message">Version %1$s\n\nBêje turns your speech into text entirely on your device. Audio is never stored and no data is sent over the internet. The internet is only used to download language packs from Google Play.\n\nOpen-source components: Vosk and Kaldi models (Apache 2.0), JNA (Apache 2.0), AndroidX and Material Components (Apache 2.0).</string>
+</resources>
